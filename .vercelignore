@@ -1,0 +1,13 @@
+.sites-runtime/
+dist/
+.vinext/
+.wrangler/
+Yeşil Rota Yapı _ Çatı, Cephe ve Yapı Sistemleri_files/
+*.zip
+*.tar.gz
+node_modules/
+.vercel/
+.vscode/
+.github/
+.env
+/.git
