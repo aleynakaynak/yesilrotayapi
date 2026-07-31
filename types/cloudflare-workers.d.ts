@@ -1,5 +1,6 @@
 declare module 'cloudflare:workers' {
-  export const env: { [key: string]: string | undefined };
+  // runtime binding map — values can be strings or runtime bindings (DB, Fetcher, etc.)
+  export const env: { [key: string]: any };
   const _default: typeof env;
   export default _default;
 }
