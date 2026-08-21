@@ -9,6 +9,31 @@ type ServicePageProps = {
   params: Promise<{ slug: string }>;
 };
 
+const serviceGalleries: Record<string, string[]> = {
+  "kenet-cati-uygulamalari": [
+    "WhatsApp Image 2026-08-20 at 14.45.09 (2).jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.09 (3).jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.10 (1).jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.10.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.30.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.31 (1).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.31.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.32.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.33.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34 (1).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34 (2).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34 (3).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34 (4).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34 (5).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34 (6).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.34.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.35 (1).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.35 (2).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.35 (3).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.35.jpeg",
+  ].map((fileName) => `/images/${encodeURIComponent(fileName)}`),
+};
+
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
 }
@@ -40,6 +65,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const related = services
     .filter((item) => item.category === service.category && item.slug !== service.slug)
     .slice(0, 3);
+
+  const gallery = serviceGalleries[service.slug];
 
   return (
     <main>
@@ -84,6 +111,29 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </ul>
         </aside>
       </section>
+
+      {gallery && (
+        <section className="subpage-section service-gallery">
+          <div className="subpage-heading">
+            <p className="eyebrow dark">SAHADAN</p>
+            <h2>{service.shortTitle} uygulama fotoğrafları.</h2>
+          </div>
+          <div className="projects-masonry">
+            {gallery.map((src, index) => (
+              <figure className="project-tile" key={src}>
+                {/* eslint-disable-next-line @next/next/no-img-element -- next/image's optimizer isn't supported on this Cloudflare/vinext runtime */}
+                <img
+                  src={src}
+                  alt={`${service.shortTitle} uygulaması ${index + 1}`}
+                  loading="lazy"
+                  width={640}
+                  height={480}
+                />
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="detail-steps">
         <div>
