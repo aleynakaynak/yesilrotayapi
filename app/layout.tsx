@@ -25,8 +25,12 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: "/brand/logo-mark.png", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/brand/logo-mark.png",
+    apple: "/brand/logo-mark.png",
   },
 };
 
