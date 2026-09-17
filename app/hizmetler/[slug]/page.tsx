@@ -11,13 +11,6 @@ type ServicePageProps = {
 
 const serviceGalleries: Record<string, string[]> = {
   "kenet-cati-uygulamalari": [
-    "WhatsApp Image 2026-08-20 at 14.45.09 (2).jpeg",
-    "WhatsApp Image 2026-08-20 at 14.45.09 (3).jpeg",
-    "WhatsApp Image 2026-08-20 at 14.45.10 (1).jpeg",
-    "WhatsApp Image 2026-08-20 at 14.45.10.jpeg",
-    "WhatsApp Image 2026-08-20 at 16.21.30.jpeg",
-    "WhatsApp Image 2026-08-20 at 16.21.31 (1).jpeg",
-    "WhatsApp Image 2026-08-20 at 16.21.31.jpeg",
     "WhatsApp Image 2026-08-20 at 16.21.32.jpeg",
     "WhatsApp Image 2026-08-20 at 16.21.33.jpeg",
     "WhatsApp Image 2026-08-20 at 16.21.34 (1).jpeg",
@@ -31,6 +24,13 @@ const serviceGalleries: Record<string, string[]> = {
     "WhatsApp Image 2026-08-20 at 16.21.35 (2).jpeg",
     "WhatsApp Image 2026-08-20 at 16.21.35 (3).jpeg",
     "WhatsApp Image 2026-08-20 at 16.21.35.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.30.jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.31 (1).jpeg",
+    "WhatsApp Image 2026-08-20 at 16.21.31.jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.09 (2).jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.09 (3).jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.10 (1).jpeg",
+    "WhatsApp Image 2026-08-20 at 14.45.10.jpeg",
   ].map((fileName) => `/images/${encodeURIComponent(fileName)}`),
 };
 
@@ -120,14 +120,18 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
           <div className="projects-masonry">
             {gallery.map((src, index) => (
-              <figure className="project-tile" key={src}>
+              <figure
+                className="project-tile"
+                key={src}
+                style={index < 2 ? { gridColumn: "1 / -1", minHeight: "460px" } : undefined}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element -- next/image's optimizer isn't supported on this Cloudflare/vinext runtime */}
                 <img
                   src={src}
                   alt={`${service.shortTitle} uygulaması ${index + 1}`}
-                  loading="lazy"
-                  width={640}
-                  height={480}
+                  loading={index < 2 ? "eager" : "lazy"}
+                  width={index < 2 ? 1280 : 640}
+                  height={index < 2 ? 720 : 480}
                 />
               </figure>
             ))}
