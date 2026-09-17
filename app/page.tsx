@@ -7,23 +7,27 @@ import { projects, serviceCategories, services } from "./site-content";
 const highlights = [
   {
     number: "01",
-    title: "Çatı Sistemleri",
-    description: "Kenet, panel, membran ve trapez çözümleri",
+    title: "Kenet Çatı Sistemleri",
+    description: "Profesyonel kenet çatı uygulamaları ve detay çözümleri",
+    href: "/hizmetler/kenet-cati-uygulamalari",
   },
   {
     number: "02",
     title: "Cephe ve Kaplama",
     description: "Panel, Corten, kompozit ve giydirme cephe",
+    href: "/hizmetlerimiz",
   },
   {
     number: "03",
     title: "Çelik Yapılar",
     description: "Ağır çelik ve kutu profil sistemleri",
+    href: "/hizmetlerimiz",
   },
   {
     number: "04",
     title: "Yaşam Alanları",
     description: "Konut, villa ve bungalov projeleri",
+    href: "/hizmetlerimiz",
   },
 ];
 
@@ -79,29 +83,32 @@ export default function Home() {
       <section className="hero-full hero-full-home" id="anasayfa">
         <HeroMedia
           images={[
+            {
+              src: "/images/WhatsApp%20Image%202026-08-20%20at%2016.21.32.jpeg",
+              alt: "Yeşil Rota Yapı büyük ölçekli kenet çatı uygulaması",
+            },
             { src: "/images/hero.webp", alt: "Yeşil Rota Yapı tarafından uygulanan modern çatı ve cephe projesi" },
             { src: "/images/industrial-facade.webp", alt: "Endüstriyel yapı cephe uygulaması" },
-            { src: "/images/kenet-roof.webp", alt: "Kenet birleşimli metal çatı kaplaması" },
           ]}
         />
         <div className="hero-full-content">
-          <p className="eyebrow">ÇATI · CEPHE · YAPI SİSTEMLERİ</p>
+          <p className="eyebrow">KENET ÇATI · ÇATI · CEPHE · YAPI SİSTEMLERİ</p>
           <h1>
             Çatı, Cephe ve Yapı
             <span>Uygulamalarında</span>
             Güvenilir Çözümler
           </h1>
           <p className="hero-full-text">
-            Endüstriyel yapılardan konut ve villa projelerine kadar; çatı, cephe,
-            çelik ve tamamlayıcı yapı uygulamalarını tek noktadan planlıyor ve
-            uyguluyoruz.
+            Kenet çatı başta olmak üzere; endüstriyel yapılardan konut ve villa
+            projelerine kadar çatı, cephe, çelik ve tamamlayıcı yapı uygulamalarını
+            tek noktadan planlıyor ve uyguluyoruz.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="/hizmetlerimiz">
-              Hizmetlerimizi İnceleyin <span aria-hidden="true">↓</span>
+            <a className="button button-primary" href="/hizmetler/kenet-cati-uygulamalari">
+              Kenet Çatı Uygulamalarını İnceleyin <span aria-hidden="true">↗</span>
             </a>
-            <a className="button button-secondary" href="/projelerimiz">
-              Projelerimizi Görün
+            <a className="button button-secondary" href="/hizmetlerimiz">
+              Tüm Hizmetlerimiz
             </a>
           </div>
           <div className="hero-badges" aria-label="Öne çıkan bilgiler">
@@ -113,14 +120,14 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-project-label">
-          <span>Uygulama</span>
-          <strong>Çatı ve Cephe Sistemleri</strong>
+          <span>Öne Çıkan Uygulama</span>
+          <strong>Kenet Çatı Sistemleri</strong>
         </div>
       </section>
 
       <section className="highlight-strip" aria-label="Hizmet grupları">
         {highlights.map((item) => (
-          <a href="/hizmetlerimiz" className="highlight-item" key={item.number}>
+          <a href={item.href} className="highlight-item" key={item.number}>
             <span className="highlight-number">{item.number}</span>
             <span>
               <strong>{item.title}</strong>
