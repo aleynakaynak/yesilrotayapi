@@ -37,13 +37,25 @@ export default function SiteHeader({ activePath }: SiteHeaderProps) {
         Teklif Al <span aria-hidden="true">↗</span>
       </a>
 
-      <details className="mobile-nav">
+      <details className="mobile-nav" style={{ position: "relative", zIndex: 1000 }}>
         <summary aria-label="Menüyü aç">
           <span />
           <span />
           <span />
         </summary>
-        <nav aria-label="Mobil menü">
+        <nav
+          aria-label="Mobil menü"
+          style={{
+            position: "fixed",
+            top: "72px",
+            right: "16px",
+            left: "16px",
+            zIndex: 1001,
+            width: "auto",
+            maxHeight: "calc(100vh - 88px)",
+            overflowY: "auto",
+          }}
+        >
           {navigation.map((item) => (
             <a
               key={item.href}
