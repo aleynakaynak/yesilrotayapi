@@ -48,9 +48,13 @@ export async function generateMetadata({
     return {};
   }
 
+  const isKenet = service.slug === "kenet-cati-uygulamalari";
+
   return {
     title: service.title,
-    description: service.description,
+    description: isKenet
+      ? "Kenet çatı uygulamalarında güçlü saha tecrübesi, doğru detay çözümü ve profesyonel uygulama. Projeniz için hızlı teklif alın."
+      : service.description,
   };
 }
 
@@ -67,12 +71,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
     .slice(0, 3);
 
   const gallery = serviceGalleries[service.slug];
+  const isKenet = service.slug === "kenet-cati-uygulamalari";
+  const heroImage = isKenet && gallery?.length ? gallery[0] : service.image;
+  const heroAlt = isKenet
+    ? "Yeşil Rota Yapı büyük ölçekli kenet çatı uygulaması"
+    : service.imageAlt;
 
   return (
     <main>
       <SiteHeader activePath="/hizmetlerimiz" />
       <section className="hero-full hero-full-detail">
-        <HeroMedia images={[{ src: service.image, alt: service.imageAlt }]} />
+        <HeroMedia images={[{ src: heroImage, alt: heroAlt }]} />
         <div className="hero-full-content">
           <nav className="breadcrumb" aria-label="Sayfa yolu">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- next/link isn't supported on this Cloudflare/vinext runtime */}
@@ -85,11 +94,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <p className="eyebrow">{service.category.toUpperCase()}</p>
           <h1>{service.title}</h1>
           <p className="hero-full-text">{service.description}</p>
-          <a className="button button-primary" href="/iletisim">
-            Bu Hizmet İçin Teklif Al <span aria-hidden="true">↗</span>
-          </a>
+          {isKenet ? (
+            <div className="hero-actions">
+              <a className="button button-primary" href="/iletisim">
+                Kenet Çatı İçin Hızlı Teklif Al <span aria-hidden="true">↗</span>
+              </a>
+              <a className="button button-secondary" href="#kenet-projeleri">
+                Uygulamalarımızı Gör <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          ) : (
+            <a className="button button-primary" href="/iletisim">
+              Bu Hizmet İçin Teklif Al <span aria-hidden="true">↗</span>
+            </a>
+          )}
         </div>
-        {(service.imageRepresentative || service.imageConcept) && (
+        {!isKenet && (service.imageRepresentative || service.imageConcept) && (
           <span className="image-tag">
             {service.imageConcept ? "Konsept Görsel" : "Temsili Görsel"}
           </span>
@@ -99,7 +119,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section className="subpage-section service-detail-body">
         <div>
           <p className="eyebrow dark">UYGULAMA KAPSAMI</p>
-          <h2>Projenin ihtiyacına göre planlanan uygulama.</h2>
+          <h2>
+            {isKenet
+              ? "Kenet çatı uygulamasında detay, işçilik ve saha çözümü birlikte ele alınır."
+              : "Projenin ihtiyacına göre planlanan uygulama."}
+          </h2>
           <p>{service.scope}</p>
         </div>
         <aside>
@@ -113,10 +137,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       {gallery && (
-        <section className="subpage-section service-gallery">
+        <section
+          className="subpage-section service-gallery"
+          id={isKenet ? "kenet-projeleri" : undefined}
+        >
           <div className="subpage-heading">
             <p className="eyebrow dark">SAHADAN</p>
-            <h2>{service.shortTitle} uygulama fotoğrafları.</h2>
+            <h2>
+              {isKenet
+                ? "Gerçek kenet çatı uygulamalarımız."
+                : `${service.shortTitle} uygulama fotoğrafları.`}
+            </h2>
           </div>
           <div className="projects-masonry">
             {gallery.map((src, index) => (
